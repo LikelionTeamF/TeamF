@@ -17,6 +17,12 @@ from django.contrib import admin
 from django.urls import path
 from blockchain import views
 
+'''
+해야될 일
+1. url 분리
+2. question_list함수 views.py에 만들기(API형태로 리턴)
+'''
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.db_test),
