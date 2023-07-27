@@ -7,12 +7,14 @@ import json
 def db_test(request):
     if request.method == "POST":
         #print(request.POST)
-        body = json.loads(request.body)
-        name = body["name"]
+        #body = json.loads(request.body)
+        #name = body["name"]
         data = {
-            "name": name,
+            "name": "choi",
             "age": 20,
             "hobbies": ["Coding", "Art", "Gaming", "Cricket", "Piano"]
         }
-    
-    return HttpResponse("Hello API")
+        print(data)
+        return JsonResponse(data, safe = False)
+    else:
+        return HttpResponse("Hello API")
