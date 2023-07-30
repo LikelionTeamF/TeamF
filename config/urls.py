@@ -19,9 +19,8 @@ from blockchain import views
 
 '''
 해야될 일
-1. url 분리
-2. question_list함수 views.py에 만들기(API형태로 리턴)
-3. GPT API 다뤄보기!
+1. question_list함수 views.py에 만들기(API형태로 리턴)
+2. GPT API 다뤄보기!
 '''
 
 urlpatterns = [
