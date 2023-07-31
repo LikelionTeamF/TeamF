@@ -3,6 +3,10 @@ from django.http import HttpResponse
 from django.http import JsonResponse
 import json
 from .models import CoinNews
+from .serializers import CoinNewsSerializer
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from rest_framework.decorators import api_view
 # Create your views here.
 def db_test(request):
     if request.method == "POST":
@@ -18,8 +22,14 @@ def db_test(request):
         return JsonResponse(data, safe = False)
     else:
         return HttpResponse("Hello API")
-    
+
 def index(request):
     news_list = CoinNews.objects.order_by('-create_date')
     context = {'news_list': news_list}
     return render(request, 'pybo/question_list.html', context)
+@api_view(["GET", "POST"])
+def CoinNewsAPI(request): 
+    queryset = CoinNews.objects.all() 
+    print(queryset)
+    serializer = CoinNewsSerializer(queryset, many=True) 
+    return Response(serializer.data)
