@@ -79,7 +79,7 @@ class AuthUserUserPermissions(models.Model):
 
 class CoinNews(models.Model):
     #news_id = models.IntegerField(primary_key=True)
-    news_id = models.AutoField(primary_key=True)
+    news_id = models.AutoField(primary_key=True, default= 1)
     news_title = models.TextField(blank=True, null=True)
     thumb_url = models.TextField(blank=True, null=True)
     view = models.IntegerField(blank=True, null=True)
