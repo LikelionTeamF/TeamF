@@ -42,6 +42,10 @@ CORS_ALLOWED_ORIGINS = [
 # Application definition
 
 INSTALLED_APPS = [
+    'corsheaders', # CORS 관련 추가'
+
+
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -54,6 +58,8 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    
+    'corsheaders.middleware.CorsMiddleware',     # CORS 관련 추가
     'django.middleware.common.CommonMiddleware',
 
 

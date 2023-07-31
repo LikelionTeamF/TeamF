@@ -76,19 +76,16 @@ class AuthUserUserPermissions(models.Model):
         db_table = 'auth_user_user_permissions'
         unique_together = (('user', 'permission'),)
 
-
 class CoinNews(models.Model):
-    #news_id = models.IntegerField(primary_key=True)
-    news_id = models.AutoField(primary_key=True, default= 1)
+    news_id = models.AutoField(primary_key=True)
     news_title = models.TextField(blank=True, null=True)
     thumb_url = models.TextField(blank=True, null=True)
     view = models.IntegerField(blank=True, null=True)
     src = models.TextField(blank=True, null=True)
-
+    content = models.TextField(blank=True, null=True)
     class Meta:
-        managed = False
+        managed = True
         db_table = 'coin_news'
-
 
 class DjangoAdminLog(models.Model):
     action_time = models.DateTimeField()
