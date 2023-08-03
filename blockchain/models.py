@@ -83,6 +83,7 @@ class CoinNews(models.Model):
     view = models.IntegerField(blank=True, null=True)
     src = models.TextField(blank=True, null=True)
     content = models.TextField(blank=True, null=True)
+    summary = models.TextField(blank=True, null=True)
     class Meta:
         managed = True
         db_table = 'coin_news'

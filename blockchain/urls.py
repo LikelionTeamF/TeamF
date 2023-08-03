@@ -8,5 +8,6 @@ app_name = 'blockchain'
 urlpatterns = [
     path('', views.db_test, name = 'db_test'),
     path('apitest', views.CoinNewsAPI),
+    path('<int:news_id>/', views.detail, name= 'detail'),
     path('loadcoinnews', views.LoadCoinNews),
 ]

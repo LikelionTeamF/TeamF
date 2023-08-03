@@ -8,6 +8,8 @@ from .serializers import CoinNewsSerializer
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.decorators import api_view
+from news import GetNewsContent
+from gpt import gpt
 
 # Create your views here.
 def db_test(request):
@@ -50,7 +52,16 @@ def LoadCoinNews(request):
             coinNews.news_title = newsData['title']
             coinNews.thumb_url = newsData['image_url']
             coinNews.views = 0 
-            coinNews.src = ""
+            coinNews.src = newsData['news_url']
+            coinNews.content = GetNewsContent(coinNews.src)
+            coinNews.summary = gpt(coinNews.content)
             coinNews.save()
         #print(r.json())
     return HttpResponse(url)
+
+
+@api_view(["GET", "POST"])
+def detail(request, news_id):
+    queryset = CoinNews.objects.filter(news_id=news_id)
+    serializer = CoinNewsSerializer(queryset, many=True) 
+    return Response(serializer.data)
