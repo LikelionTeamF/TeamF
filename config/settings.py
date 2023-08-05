@@ -38,7 +38,6 @@ CORS_ALLOWED_ORIGINS = [
     'http://localhost:3000',  # 예시 URL
 ]
 
-
 # Application definition
 
 INSTALLED_APPS = [
