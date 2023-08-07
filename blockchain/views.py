@@ -63,5 +63,6 @@ def LoadCoinNews(request):
 @api_view(["GET", "POST"])
 def detail(request, news_id):
     queryset = CoinNews.objects.filter(news_id=news_id)
-    serializer = CoinNewsSerializer(queryset, many=True) 
-    return Response(serializer.data)
+    serializer = CoinNewsSerializer(queryset, many=True)
+    print(type(serializer.data[0]))
+    return Response(serializer.data[0])
