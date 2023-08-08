@@ -1,5 +1,6 @@
 from blockchain.models import CoinNews
 
+news= CoinNews.objects.all()
 
 STYLES = '''
 <style>
@@ -45,7 +46,7 @@ STYLES = '''
 
 
 NEWS_TABLE_FORMAT = '''
-<table style="width: 100%; text-align: center; border: 2px solid; margin-bottom: 15px;">
+<table>
     <thead>
         <th>{TYPE}</th>
     </thead>
@@ -57,7 +58,7 @@ NEWS_TABLE_FORMAT = '''
 
 ARTICLE_FORMAT = '''
         <tr>
-            <td style="border: 1px solid rgba(32, 229, 255, 0.932);"><a href="{}" target="_blank">{}</a></td>
+            <td><a href="{}" target="_blank">{}</a></td>
         </tr>
 '''
 

@@ -10,6 +10,8 @@ from rest_framework.views import APIView
 from rest_framework.decorators import api_view
 from news import GetNewsContent
 from gpt import gpt
+from newsletter import NewsLetter
+
 
 # Create your views here.
 def db_test(request):
@@ -69,3 +71,7 @@ def detail(request, news_id):
     serializer = CoinNewsSerializer(queryset)
     #print(type(serializer.data[0]))
     return Response(serializer.data)
+
+def SendNews(request, email_address):
+    NewsLetter(email_address = email_address)
+    return HttpResponse("Email Success")
