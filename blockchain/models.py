@@ -85,6 +85,8 @@ class CoinNews(models.Model):
     content = models.TextField(blank=True, null=True)
     summary = models.TextField(blank=True, null=True)
     create_date = models.DateField(blank=True, null=True)
+    tickers = models.TextField(blank = True, null = True)
+    source_name = models.TextField(blank = True, null = True)
     class Meta:
         managed = True
         db_table = 'coin_news'

@@ -10,5 +10,6 @@ urlpatterns = [
     path('apitest', views.CoinNewsAPI),
     path('<int:news_id>/', views.detail, name= 'detail'),
     path('loadcoinnews', views.LoadCoinNews),
+    path('reset', views.Reset),
     path('sendnews/<str:email_address>', views.SendNews),
 ]

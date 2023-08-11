@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.http import JsonResponse
+from django.utils import timezone
 import json
 import requests
 from .models import CoinNews
@@ -42,7 +43,7 @@ def CoinNewsAPI(request):
     return Response(serializer.data)
 
 def LoadCoinNews(request):
-    apiKey = "27ddvbcs5cv6gc0lubw0mte0xvp5mryumerjt8ij"
+    apiKey = "nsez6m6xbgcn5cpookmjdbwwwartzly8gyahjojz"
     
     for page in range(1,5):
         url = f"https://cryptonews-api.com/api/v1?tickers=BTC&items=3&page={page}&token={apiKey}"
@@ -53,13 +54,23 @@ def LoadCoinNews(request):
             coinNews = CoinNews()
             coinNews.news_title = newsData['title']
             coinNews.thumb_url = newsData['image_url']
-            coinNews.views = 0 
+            coinNews.view = 0 
+            coinNews.create_datels = timezone.now()
             coinNews.src = newsData['news_url']
+            coinNews.tickers= newsData['tickers']
+            coinNews.source_name = newsData['source_name']
             coinNews.content = GetNewsContent(coinNews.src)
             coinNews.summary = gpt(coinNews.content)
             coinNews.save()
         #print(r.json())
     return HttpResponse(url)
+
+def Reset(request):
+    queryset = CoinNews.objects.all()
+    for coinNews in queryset:
+        coinNews.delete()
+    return HttpResponse('reset')
+
 
 
 @api_view(["GET", "POST"])
