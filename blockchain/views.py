@@ -48,6 +48,7 @@ def CoinNewsAPI(request):
 
 def LoadCoinNews(request):
     apiKey = "nsez6m6xbgcn5cpookmjdbwwwartzly8gyahjojz"
+    apiKey = "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"
     
     for page in range(1,5):
         url = f"https://cryptonews-api.com/api/v1?tickers=BTC&items=3&page={page}&token={apiKey}"
