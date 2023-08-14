@@ -47,13 +47,14 @@ def CoinNewsAPI(request):
 
 
 def LoadCoinNews(request):
-    #apiKey = "nsez6m6xbgcn5cpookmjdbwwwartzly8gyahjojz"
-    apiKey = "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"
+    apiKey = "nsez6m6xbgcn5cpookmjdbwwwartzly8gyahjojz"
+    #apiKey = "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"
     
     for page in range(1,5):
         url = f"https://cryptonews-api.com/api/v1?tickers=BTC&items=3&page={page}&token={apiKey}"
         #print(url)
         r = requests.get(url).json()
+        print(r)
         newsDataList = r['data']
         for newsData in newsDataList:
             coinNews = CoinNews()
@@ -99,13 +100,29 @@ def LoadCoinNewsContent(request):
 def TranslateCoinNewsById(request, news_id):
     apiKey = "nsez6m6xbgcn5cpookmjdbwwwartzly8gyahjojz"
     coinNews = CoinNews.objects.get(news_id = news_id)
-    coinNews.news_title = gpt_title(coinNews.news_title)
+    #print(coinNews.news_title)
+    title = coinNews.news_title
+    coinNews.news_title = gpt_title(title)
     coinNews.content = gpt_content(coinNews.content)
     coinNews.summary = gpt(coinNews.content)
     coinNews.save()
 
     return HttpResponse('Translate Success')
 
+def TranslateCoinNewsAll(request):
+    queryset = CoinNews.objects.all()
+    for coinNews in queryset:
+        apiKey = "nsez6m6xbgcn5cpookmjdbwwwartzly8gyahjojz"
+        id = coinNews.news_id
+        coinNews = CoinNews.objects.get(news_id = id)
+        #print(coinNews.news_title)
+        title = coinNews.news_title
+        coinNews.news_title = gpt_title(title)
+        coinNews.content = gpt_content(coinNews.content)
+        coinNews.summary = gpt(coinNews.content)
+        coinNews.save()
+
+    return HttpResponse('Translate Success')
 
 def Reset(request):
     queryset = CoinNews.objects.all()
