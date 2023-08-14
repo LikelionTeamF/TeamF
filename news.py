@@ -7,8 +7,11 @@ def GetNewsContent(url):
     #언어가 한국어이므로 language='ko'로 설정
     a = Article(url, language='en')
     a.download()
-    a.parse()
+    try:
+        a.parse()
+    except:
+        pass
 
     #기사 내용 가져오기(150자)
-    print(a.text[:1000])
-    return a.text[:1000]
+    print(a.text[:2000])
+    return a.text[:2000]

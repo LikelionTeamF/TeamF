@@ -9,7 +9,9 @@ urlpatterns = [
     path('', views.db_test, name = 'db_test'),
     path('apitest', views.CoinNewsAPI),
     path('<int:news_id>/', views.detail, name= 'detail'),
-    path('loadcoinnews', views.LoadCoinNews),
+    path('loadcoinnews/', views.LoadCoinNews),
+    path('loadcoinnewscontent/', views.LoadCoinNewsContent),
+    path('translatecoinnews/<int:news_id>/', views.TranslateCoinNewsById),
     path('reset', views.Reset),
     path('sendnews/<str:email_address>', views.SendNews),
 ]

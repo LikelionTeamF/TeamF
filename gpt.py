@@ -9,7 +9,7 @@ def gpt(content):
     messages.append({"role": "user", "content":content})
 
     completion = openai.ChatCompletion.create(
-        model="gpt-3.5-turbo",
+        model="gpt-3.5-turbo-16k",
          messages=messages
     )
     chat_response = completion.choices[0].message.content 
