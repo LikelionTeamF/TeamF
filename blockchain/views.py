@@ -47,7 +47,7 @@ def CoinNewsAPI(request):
 
 
 def LoadCoinNews(request):
-    apiKey = "nsez6m6xbgcn5cpookmjdbwwwartzly8gyahjojz"
+    #apiKey = "nsez6m6xbgcn5cpookmjdbwwwartzly8gyahjojz"
     apiKey = "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"
     
     for page in range(1,5):
