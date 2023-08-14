@@ -11,6 +11,7 @@ from rest_framework.views import APIView
 from rest_framework.decorators import api_view
 from news import GetNewsContent
 from gpt import gpt
+from gpt2 import gpt_title
 from newsletter import NewsLetter
 
 
@@ -52,10 +53,10 @@ def LoadCoinNews(request):
         newsDataList = r['data']
         for newsData in newsDataList:
             coinNews = CoinNews()
-            coinNews.news_title = newsData['title']
+            coinNews.news_title = gpt_title(newsData['title'])
             coinNews.thumb_url = newsData['image_url']
             coinNews.view = 0 
-            coinNews.create_datels = timezone.now()
+            coinNews.create_date = timezone.now()
             coinNews.src = newsData['news_url']
             coinNews.tickers= newsData['tickers']
             coinNews.source_name = newsData['source_name']

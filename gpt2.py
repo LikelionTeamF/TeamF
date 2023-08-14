@@ -1,10 +1,10 @@
 import openai
 openai.api_key = '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'
 messages = []
-def gpt(content):
+def gpt_title(content):
     
     prompt="translate in Korean under 150 number of characters"
-    content ="Bitcoin's tight trading range mirrored by flat hash ribbons signals impending market movement"
+    #content ="Bitcoin's tight trading range mirrored by flat hash ribbons signals impending market movement"
     content = prompt+content
     messages.append({"role": "user", "content":content})
 
@@ -16,4 +16,3 @@ def gpt(content):
     print(f'ChatGPT: {chat_response}')
     messages.append({"role":"assistant", "content": chat_response})
     return chat_response
-gpt('')
