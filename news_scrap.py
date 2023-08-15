@@ -12,7 +12,8 @@ def get_specific_news_table():
     for coin_news in coin_news_list:
         print(coin_news.news_title)
         title = coin_news.news_title
-        link = coin_news.src
+        base_link = "http://115.85.183.115:3000/news/detail/"
+        link = base_link + str(coin_news.news_id)
         articles += ARTICLE_FORMAT.format(link, title)  
 
     news_table += NEWS_TABLE_FORMAT.format(TYPE=news_type,

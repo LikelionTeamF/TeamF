@@ -91,6 +91,12 @@ class CoinNews(models.Model):
         managed = True
         db_table = 'coin_news'
 
+class Subscribers(models.Model):
+    email = models.TextField(blank=True, null=True)
+    class Meta:
+        managed = True
+        db_table = 'subscribers'
+
 class DjangoAdminLog(models.Model):
     action_time = models.DateTimeField()
     object_id = models.TextField(blank=True, null=True)

@@ -5,7 +5,9 @@ from datetime import date
 from mail import MAIL_FORMAT, STYLES
 from news_scrap import get_news_table
 
-def NewsLetter(email_address):
+def NewsLetter(email_address=""):
+    if email_address == "":
+        return
     msg = MIMEMultipart('html')
     msg['Subject'] = f'{date.today().strftime("%m/%d/%Y")}의 메일'
     msg['From'] = 'lhs27733182@gmail.com'
@@ -22,3 +24,5 @@ def NewsLetter(email_address):
         smtp.ehlo()
         smtp.login('lhs27733182@gmail.com', 'rrvlkggnxtqjbuvf')
         smtp.sendmail('lhs27733182@gmail.com', email_address, msg.as_string())
+
+    print("mail")

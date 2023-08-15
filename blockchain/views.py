@@ -4,8 +4,8 @@ from django.http import JsonResponse
 from django.utils import timezone
 import json
 import requests
-from .models import CoinNews
-from .serializers import CoinNewsSerializer
+from .models import CoinNews, Subscribers
+from .serializers import CoinNewsSerializer, SubscribersSerializer
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.decorators import api_view
@@ -145,3 +145,12 @@ def detail(request, news_id):
 def SendNews(request, email_address):
     NewsLetter(email_address = email_address)
     return HttpResponse("Email Success")
+
+@api_view(["GET", "POST"])
+def Subscribe(request, email_address):
+    queryset = Subscribers()
+    queryset.email = email_address
+    queryset.save()
+    serializer = SubscribersSerializer(queryset)
+    #print(type(serializer.data[0]))
+    return Response(serializer.data)

@@ -15,4 +15,5 @@ urlpatterns = [
     path('translatecoinnews/all/', views.TranslateCoinNewsAll),
     path('reset', views.Reset),
     path('sendnews/<str:email_address>', views.SendNews),
+    path('subscribe/<str:email_address>', views.Subscribe),
 ]

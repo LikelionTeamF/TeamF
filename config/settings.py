@@ -1,4 +1,5 @@
 import my_settings
+import os
 from corsheaders.defaults import default_headers
 
 """
@@ -45,7 +46,8 @@ CORS_ALLOWED_ORIGINS = [
 INSTALLED_APPS = [
     'corsheaders', # CORS 관련 추가'
 
-
+    'django_apscheduler',
+    'django_crontab',# 주기적으로 메일 보내주는 서비스 
 
     'django.contrib.admin',
     'django.contrib.auth',
@@ -54,9 +56,19 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'blockchain',
-    'rest_framework',
-    
+    'rest_framework',   
 ]
+
+
+SCHEDULER_AUTOSTART = True
+
+
+
+CRONJOBS = [
+    ('*/1 * * * *', 'subscribe.SendToSubscribers', '>> '+os.path.join(BASE_DIR, 'config/log/cron.log')+' 2>&1 '),
+]
+
+
 
 MIDDLEWARE = [
     
