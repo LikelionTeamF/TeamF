@@ -5,5 +5,5 @@ def SendToSubscribers():
     subscribers = Subscribers.objects.all() 
     for subscriber in subscribers:
         NewsLetter(subscriber.email)
-        print(subscriber + " send")
+        print(subscriber.email + " send")
 
