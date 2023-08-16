@@ -4,8 +4,8 @@ from django.http import JsonResponse
 from django.utils import timezone
 import json
 import requests
-from .models import CoinNews
-from .serializers import CoinNewsSerializer
+from .models import CoinNews, Subscribers
+from .serializers import CoinNewsSerializer, SubscribersSerializer
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.decorators import api_view
@@ -54,6 +54,7 @@ def LoadCoinNews(request):
         url = f"https://cryptonews-api.com/api/v1?tickers=BTC&items=3&page={page}&token={apiKey}"
         #print(url)
         r = requests.get(url).json()
+        print(r)
         newsDataList = r['data']
         for newsData in newsDataList:
             coinNews = CoinNews()
@@ -99,13 +100,29 @@ def LoadCoinNewsContent(request):
 def TranslateCoinNewsById(request, news_id):
     apiKey = "nsez6m6xbgcn5cpookmjdbwwwartzly8gyahjojz"
     coinNews = CoinNews.objects.get(news_id = news_id)
-    coinNews.news_title = gpt_title(coinNews.news_title)
+    #print(coinNews.news_title)
+    title = coinNews.news_title
+    coinNews.news_title = gpt_title(title)
     coinNews.content = gpt_content(coinNews.content)
     coinNews.summary = gpt(coinNews.content)
     coinNews.save()
 
     return HttpResponse('Translate Success')
 
+def TranslateCoinNewsAll(request):
+    queryset = CoinNews.objects.all()
+    for coinNews in queryset:
+        apiKey = "nsez6m6xbgcn5cpookmjdbwwwartzly8gyahjojz"
+        id = coinNews.news_id
+        coinNews = CoinNews.objects.get(news_id = id)
+        #print(coinNews.news_title)
+        title = coinNews.news_title
+        coinNews.news_title = gpt_title(title)
+        coinNews.content = gpt_content(coinNews.content)
+        coinNews.summary = gpt(coinNews.content)
+        coinNews.save()
+
+    return HttpResponse('Translate Success')
 
 def Reset(request):
     queryset = CoinNews.objects.all()
@@ -128,3 +145,12 @@ def detail(request, news_id):
 def SendNews(request, email_address):
     NewsLetter(email_address = email_address)
     return HttpResponse("Email Success")
+
+@api_view(["GET", "POST"])
+def Subscribe(request, email_address):
+    queryset = Subscribers()
+    queryset.email = email_address
+    queryset.save()
+    serializer = SubscribersSerializer(queryset)
+    #print(type(serializer.data[0]))
+    return Response(serializer.data)

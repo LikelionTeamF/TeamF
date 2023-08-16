@@ -45,22 +45,25 @@ STYLES = '''
 
 
 NEWS_TABLE_FORMAT = '''
-<table style="width: 100%; text-align: center; border: 2px solid; margin-bottom: 15px;">
+<table style="width: 100%; text-align: center; margin-bottom: 15px;">
     <thead>
-        <th>{TYPE}</th>
+        <tr>
+            <th style="border: 1px solid black; padding: 10px; color: darkblue;">{TYPE}</th>
+        </tr>
     </thead>
     <tbody>
-{ARTICLES}
+        {ARTICLES}
     </tbody>
 </table>
 '''
 
 ARTICLE_FORMAT = '''
-        <tr>
-            <td style="border: 1px solid rgba(32, 229, 255, 0.932);"><a href="{}" target="_blank">{}</a></td>
-        </tr>
+<tr>
+    <td style="border: 1px solid black; padding: 10px; color: black;">
+        <a href="{}" target="_blank" style="color: black;">{}</a>
+    </td>
+</tr>
 '''
-
 
 MAIL_FORMAT = '''
 <!DOCTYPE html>
@@ -71,9 +74,10 @@ MAIL_FORMAT = '''
 </head>
 {STYLE}
 <body>
-    <div class="container">
-    <h1>오늘자 MoT</h1>
-    {NEWS}
+    <div class="container" style="text-align: center;">
+        <h1 style="color: darkblue;">오늘의 MoT</h1>
+        {NEWS}
     </div>
 </body>
-</html>'''
+</html>
+'''
