@@ -1,2 +1,2 @@
-def crontab_every_minute():
-    print('hello cron!')
+import sys
+print(sys.path)

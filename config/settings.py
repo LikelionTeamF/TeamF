@@ -65,7 +65,7 @@ SCHEDULER_AUTOSTART = True
 
 
 CRONJOBS = [
-    ('*/10 * * *', 'subscribe.SendToSubscribers', '>> '+os.path.join(BASE_DIR, 'config/log/cron.log')+' 2>&1 '),
+    ('*/2 * * * *', 'subscribe.SendToSubscribers', '>> '+os.path.join(BASE_DIR, 'config/log/cron.log')+' 2>&1 '),
 ]
 
 
