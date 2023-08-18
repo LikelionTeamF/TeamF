@@ -15,6 +15,21 @@ from gpt2 import gpt_title, gpt_content
 from newsletter import NewsLetter
 
 
+month_dict = {
+        'Jan': 1,
+        'Feb': 2,
+        'Mar': 3,
+        'Apr':4,
+         'May':5,
+         'Jun':6,
+         'Jul':7,
+         'Aug':8,
+         'Sep':9,
+         'Oct':10,
+         'Nov':11,
+         'Dec':12
+        }
+
 # Create your views here.
 def db_test(request):
     if request.method == "POST":
@@ -61,7 +76,14 @@ def LoadCoinNews(request):
             coinNews.news_title = gpt_title(newsData['title'])
             coinNews.thumb_url = newsData['image_url']
             coinNews.view = 0 
-            coinNews.create_date = newsData['date']
+
+            temp_date = newsData['date'].split(' ')
+            year = temp_date[3]
+            month = temp_date[2]
+            day = temp_date[1]
+            temp_res_date = year + "-" + "8" + "-" + day
+            coinNews.create_date = temp_res_date
+
             coinNews.src = newsData['news_url']
             coinNews.tickers= newsData['tickers']
             coinNews.source_name = newsData['source_name']
@@ -86,7 +108,14 @@ def LoadCoinNewsContent(request):
             coinNews.news_title = newsData['title']
             coinNews.thumb_url = newsData['image_url']
             coinNews.view = 0 
-            coinNews.create_date = timezone.now()
+            
+            temp_date = newsData['date'].split(' ')
+            year = temp_date[3]
+            month = temp_date[2]
+            day = temp_date[1]
+            temp_res_date = year + "-" + month_dict[month] + "-" + day
+            coinNews.create_date = temp_res_date
+
             coinNews.src = newsData['news_url']
             coinNews.tickers= newsData['tickers']
             coinNews.source_name = newsData['source_name']
