@@ -33,14 +33,14 @@ def db_test(request):
 
 
 def index(request):
-    news_list = CoinNews.objects.order_by('-create_date')
+    news_list = CoinNews.objects.order_by('create_date')
     context = {'news_list': news_list}
     return render(request, 'pybo/question_list.html', context)
 
 
 @api_view(["GET", "POST"])
 def CoinNewsAPI(request): 
-    queryset = CoinNews.objects.all() 
+    queryset = CoinNews.objects.all().order_by('-create_date')
     print(queryset)
     serializer = CoinNewsSerializer(queryset, many=True) 
     return Response(serializer.data)
@@ -61,7 +61,7 @@ def LoadCoinNews(request):
             coinNews.news_title = gpt_title(newsData['title'])
             coinNews.thumb_url = newsData['image_url']
             coinNews.view = 0 
-            coinNews.create_date = timezone.now()
+            coinNews.create_date = newsData['date']
             coinNews.src = newsData['news_url']
             coinNews.tickers= newsData['tickers']
             coinNews.source_name = newsData['source_name']
@@ -125,7 +125,7 @@ def TranslateCoinNewsAll(request):
     return HttpResponse('Translate Success')
 
 def Reset(request):
-    queryset = CoinNews.objects.all()
+    queryset = CoinNews.objects.all().order_by('-create_date')
     for coinNews in queryset:
         coinNews.delete()
     return HttpResponse('reset')
