@@ -3,8 +3,8 @@ import openai
 openai.api_key = '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'
 messages = []
 def gpt_title(content):
-    
-    prompt="translate in Korean under 150 number of characters"
+    messages = []
+    prompt="다음 내용을 한국어로 번역해 줘. 번역한 내용만 출력해줘. 대답하지 말고."
     #content ="Bitcoin's tight trading range mirrored by flat hash ribbons signals impending market movement"
     content = prompt+content
     messages.append({"role": "user", "content":content})
@@ -20,7 +20,8 @@ def gpt_title(content):
 
 
 def gpt_content(content):
-    prompt="translate in Korean"
+    messages = []
+    prompt="Translate following document in Korean"
     #content ="Bitcoin's tight trading range mirrored by flat hash ribbons signals impending market movement"
     content = prompt+content
     messages.append({"role": "user", "content":content})
